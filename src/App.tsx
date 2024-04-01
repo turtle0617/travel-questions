@@ -6,8 +6,8 @@ import urlParser from "url-parse";
 import questions from "./assets/questions";
 import Result from "./Result";
 
-const BASE_URL = "https://travel-questions.gnehs.net";
-
+const BASE_URL = "https://turtle0617.github.io/travel-questions/";
+const SUPPORT_URL_LIST = [BASE_URL, "https://travel-questions.gnehs.net"];
 function BottomButtonContainer({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
@@ -378,9 +378,11 @@ function App() {
   function onUrlBtnClick() {
     if (!urlResult) return;
     const formattedUrl = urlResult.trim();
-    const isValid =
-      formattedUrl.trim().startsWith(`${BASE_URL}#`) ||
-      formattedUrl.trim().startsWith(`${BASE_URL}?`);
+    const isValid = SUPPORT_URL_LIST.some(
+      (url) =>
+        formattedUrl.trim().startsWith(`${url}#`) ||
+        formattedUrl.trim().startsWith(`${url}?`),
+    );
     if (!isValid) {
       alert("請貼上正確的網址");
       return;
